@@ -161,7 +161,7 @@ function selectSlot(i){
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
   var rows=[["Instituicao",form.school],["Responsavel",form.contact],["E-mail",form.email],["Telefone",form.phone]];
   if(form.guests)rows.push(["Convidados",form.guests]);
-  rows.push(["Data",fmtDate(dt)],["Horario",fmtTime(dt)+" - "+fmtTime(end)],["CSM responsavel",chosen.csmName],["Duracao",DURATION+" minutos"]);
+  rows.push(["Data",fmtDate(dt)],["Horario",fmtTime(dt)+" - "+fmtTime(end)],["Duracao",DURATION+" minutos"]);
   var rowsHtml="";
   for(var ri=0;ri<rows.length;ri++){rowsHtml+="<div class='summary-row'><span>"+rows[ri][0]+"</span><span>"+esc(String(rows[ri][1]))+"</span></div>";}
   document.getElementById("content").innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rowsHtml+"</div><div class='alert'>Ao confirmar, voce recebera um convite do Google Calendar com o link da reuniao.</div><div id='err3'></div><div style='display:flex;gap:10px'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento</button></div></div>";
