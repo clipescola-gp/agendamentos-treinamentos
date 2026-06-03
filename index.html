@@ -73,8 +73,8 @@ var MONTHS_PT=["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Ago
 var step=1,form={school:"",contact:"",email:"",phone:"",guests:""},chosen=null,meetUrl="",availSlots=[];
 function pad(n){return String(n).padStart(2,"0");}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
-function fmtDate(d){return d.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long"});}
-function fmtTime(d){return d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});}
+function fmtDate(d){return d.toLocaleDateString("pt-BR",{timeZone:"America/Sao_Paulo",weekday:"long",day:"2-digit",month:"long"});}
+function fmtTime(d){return d.toLocaleTimeString("pt-BR",{timeZone:"America/Sao_Paulo",hour:"2-digit",minute:"2-digit"});}
 function addMin(d,m){return new Date(d.getTime()+m*60000);}
 function buildCalendarHTML(slots){
   var byMonth={};
@@ -143,7 +143,7 @@ async function goStep2(){
     if(!data.success)throw new Error("error");
     availSlots=(data.days||[]).flatMap(function(d){
       return(d.slots||[]).map(function(s){
-        return{datetime:d.date+"T"+s.time+":00",csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};
+        return{datetime:d.date+"T"+s.time+":00-03:00",csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};
       });
     });
     if(!availSlots.length)throw new Error("empty");
@@ -154,7 +154,7 @@ async function goStep2(){
   renderStep2();
 }
 function renderStep2(){
-  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2>"+buildCalendarHTML(availSlots)+"<div style='margin-top:8px'><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div></div>";
+  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><p style='font-size:12px;color:#5a6074;margin:-8px 0 16px;display:flex;align-items:center;gap:4px'>🕐 Horários no fuso de Brasília (UTC-3)</p>"+buildCalendarHTML(availSlots)+"<div style='margin-top:8px'><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div></div>";
 }
 function selectSlot(i){
   chosen=availSlots[i];step=3;renderSteps();
@@ -171,7 +171,7 @@ async function confirmar(){
   try{
     var dt=new Date(chosen.datetime);
     var payload={school:form.school,contact:form.contact,email:form.email,phone:form.phone,guests:form.guests,
-      date:dt.toISOString().slice(0,10),time:pad(dt.getHours())+":"+pad(dt.getMinutes()),
+      date:chosen.datetime.split("T")[0],time:chosen.datetime.split("T")[1].slice(0,5),
       csmEmail:chosen.csmEmail,csmName:chosen.csmName,calendarId:"primary"};
     var r=await fetch(WEBHOOK_BOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
     var text=await r.text();
