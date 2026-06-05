@@ -7,10 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#22367b;--blue2:#1a2d6b;--yellow:#ffca26;--light:#d3e2f2;--white:#fff;--gray:#5a6074;--bg:#f5f7fb;--radius:12px;--shadow:0 4px 24px rgba(34,54,123,.10)}
+:root{--blue:#22367b;--blue2:#1a2d6b;--yellow:#ffca26;--light:#d3e2f2;--gray:#5a6074;--bg:#f5f7fb;--radius:12px;--shadow:0 4px 24px rgba(34,54,123,.10)}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--blue);min-height:100vh}
+
+/* ── Header ── */
 header{background:var(--blue);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
 .badge{background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.4);color:var(--yellow);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+
+/* ── Booking ── */
 .hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue2) 100%);padding:48px 32px 56px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,202,38,.07);top:-80px;right:-80px}
 .hero-tag{display:inline-block;background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.35);color:var(--yellow);font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
@@ -29,15 +33,15 @@ header{background:var(--blue);padding:0 32px;height:64px;display:flex;align-item
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
 .form-group.full{grid-column:1/-1}
 label{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px}
-input{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none;transition:border .2s}
-input:focus{border-color:var(--blue)}
+input[type=text],input[type=email],input[type=tel]{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none;transition:border .2s}
+input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus{border-color:var(--blue)}
 .btn{display:inline-block;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:'Nunito',sans-serif}
 .btn-primary{background:var(--blue);color:#fff}.btn-primary:disabled{opacity:.45;cursor:not-allowed}
 .btn-secondary{background:#fff;color:var(--blue);border:1.5px solid var(--light)}
 .summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--light);font-size:14px}
 .summary-row:last-child{border-bottom:none}
 .summary-row span:first-child{color:var(--gray);font-weight:600}
-.alert{background:#fffbea;border:1px solid rgba(255,202,38,.5);border-radius:8px;padding:12px 16px;font-size:13px;color:#92400e;margin-bottom:16px}
+.alert-box{background:#fffbea;border:1px solid rgba(255,202,38,.5);border-radius:8px;padding:12px 16px;font-size:13px;color:#92400e;margin-bottom:16px}
 .error-box{background:#fde8e8;border:1px solid #f8b4b4;border-radius:8px;padding:12px 16px;font-size:13px;color:#9b1c1c;margin-top:12px}
 .success-card{text-align:center;padding:48px 32px}
 .success-icon{width:64px;height:64px;border-radius:50%;background:#def7ec;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px}
@@ -49,33 +53,253 @@ input:focus{border-color:var(--blue)}
 footer{text-align:center;padding:32px;color:var(--gray);font-size:12px;border-top:1px solid var(--light);margin-top:16px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:600px){.form-row{grid-template-columns:1fr}.form-group.full{grid-column:auto}.hero h1{font-size:22px}.main{padding:20px 16px}}
+
+/* ── Admin ── */
+.admin-subbar{background:#fff;border-bottom:1px solid var(--light);padding:10px 32px;display:flex;align-items:center;gap:8px}
+.admin-layout{display:flex;min-height:calc(100vh - 128px)}
+.admin-sidebar-panel{width:224px;background:#fff;border-right:1px solid var(--light);padding:16px;flex-shrink:0}
+.admin-content{flex:1;padding:28px 32px;background:var(--bg);overflow-y:auto}
+.admin-card{background:#fff;border:1px solid var(--light);border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(34,54,123,.07)}
+.admin-card-title{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.adot{width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;display:inline-block}
+.csm-item{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;cursor:pointer;margin-bottom:6px;border:1.5px solid transparent;transition:background .15s}
+.csm-item.sel{background:#fff;border-color:var(--light)}
+.csm-item:not(.sel){background:var(--bg)}
+.csm-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;flex-shrink:0}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.fg2 .sp2{grid-column:1/-1}
+.fl{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px}
+.fi{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none}
+.fi:focus{border-color:var(--blue)}
+.fs{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none}
+.slot-tag{background:#eef2ff;border:1px solid #c5d8f8;border-radius:6px;padding:3px 10px;font-size:12px;display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-weight:700;margin:2px 4px 4px 0}
+.abtn{display:inline-block;padding:11px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:'Nunito',sans-serif;text-decoration:none}
+.abtn-primary{background:var(--blue);color:#fff}
+.abtn-secondary{background:#fff;color:var(--blue);border:1.5px solid var(--light)}
+.abtn-sm{padding:9px 16px;font-size:13px}
+.abtn-danger{background:#fde8e8;color:#c81e1e;border:1.5px solid #f8b4b4}
+.saved-ok{background:#def7ec;color:#057a55;border:1px solid #84e1bc;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;display:none}
 </style>
 </head>
 <body>
-<header>
-  <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
-  <div class="badge">Treinamento</div>
-</header>
-<div class="hero">
-  <div class="hero-tag">Reunião de Treinamento</div>
-  <h1>Agende sua reunião de treinamento</h1>
-  <p>Escolha o melhor horário e nossa equipe estará pronta para iniciar sua jornada com a ClipEscola.</p>
+
+<!-- ══ PÁGINA PÚBLICA ══ -->
+<div id="page-booking">
+  <header>
+    <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
+    <div class="badge">Treinamento</div>
+  </header>
+  <div class="hero">
+    <div class="hero-tag">Reunião de Treinamento</div>
+    <h1>Agende sua reunião de treinamento</h1>
+    <p>Escolha o melhor horário e nossa equipe estará pronta para iniciar sua jornada com a ClipEscola.</p>
+  </div>
+  <div class="steps-bar" id="stepsBar"></div>
+  <div class="main"><div id="content"></div></div>
+  <footer>
+    ClipEscola · Agendamento de Treinamento
+    <a href="?admin" style="margin-left:12px;color:var(--light);font-size:12px;text-decoration:none;opacity:.5" title="Painel administrativo">⚙</a>
+  </footer>
 </div>
-<div class="steps-bar" id="stepsBar"></div>
-<div class="main"><div id="content"></div></div>
-<footer>ClipEscola · Agendamento de Treinamento</footer>
+
+<!-- ══ PAINEL ADMIN ══ -->
+<div id="page-admin" style="display:none">
+  <header>
+    <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
+    <div class="badge">Retaguarda</div>
+  </header>
+  <div class="admin-subbar">
+    <span style="font-size:13px;font-weight:700;color:var(--blue)">Agendamento de Treinamento</span>
+    <span id="admin-count" style="font-size:13px;color:var(--gray);margin-left:4px"></span>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+      <span id="saved-ok" class="saved-ok">✓ Salvo!</span>
+      <a href="." class="abtn abtn-secondary abtn-sm">← Ver página pública</a>
+      <button class="abtn abtn-primary abtn-sm" onclick="saveAdminConfig()">Salvar configurações</button>
+    </div>
+  </div>
+  <div class="admin-layout">
+    <div class="admin-sidebar-panel" id="admin-sidebar"></div>
+    <div class="admin-content" id="admin-content"></div>
+  </div>
+</div>
+
 <script>
-var WEBHOOK_CHECK="https://n8n.clipescola.com.br/webhook/verificar-disponibilidade";
-var WEBHOOK_BOOK="https://n8n.clipescola.com.br/webhook/agendar-implantacao";
-var DURATION=120;
-var DAYS_PT=["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
-var MONTHS_PT=["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-var step=1,form={school:"",contact:"",email:"",phone:"",guests:""},chosen=null,meetUrl="",availSlots=[];
+// ── Config ────────────────────────────────────────────────────────────────────
+var WEBHOOK_CHECK = "https://n8n.clipescola.com.br/webhook/verificar-disponibilidade";
+var WEBHOOK_BOOK  = "https://n8n.clipescola.com.br/webhook/agendar-implantacao";
+var DURATION = 120;
+var LS_KEY   = "csm_config_v1";
+var DAYS_WEEK = ["","Seg","Ter","Qua","Qui","Sex"];
+var DAYS_PT   = ["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
+var MONTHS_PT = ["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+
+var DEFAULT_CSMS = [
+  {id:1,name:"Alini Farias",      email:"alini.clipescola@gmail.com",         icsUrl:"https://calendar.google.com/calendar/ical/alini.clipescola%40gmail.com/private-45146bbd5a547df23dfcf600d0d55e95/basic.ics",      projects:41,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]},
+  {id:2,name:"Davi Morais",       email:"davimorais.clipescola@gmail.com",     icsUrl:"https://calendar.google.com/calendar/ical/davimorais.clipescola%40gmail.com/private-1ccf5f12744f25f3550b7c92bccf36b2/basic.ics",    projects:20,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]},
+  {id:3,name:"Pollyanna Antunes", email:"pollyanna.clipescola@gmail.com",      icsUrl:"https://calendar.google.com/calendar/ical/pollyanna.clipescola%40gmail.com/private-c7bf7ec4f9695004ca802d06e635861c/basic.ics",    projects:45,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]},
+  {id:4,name:"Priscilla Souza",   email:"priscillasouza.clipescola@gmail.com", icsUrl:"https://calendar.google.com/calendar/ical/priscillasouza.clipescola%40gmail.com/private-609b0c72a956f11df087a85a6141cb41/basic.ics", projects:22,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]},
+  {id:5,name:"Renan Baptistella", email:"renan.clipescola@gmail.com",          icsUrl:"https://calendar.google.com/calendar/ical/renan.clipescola%40gmail.com/private-0b24ae0debef4bc4bbc595f6e5912f23/basic.ics",         projects:25,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]}
+];
+
+var CSMS = [];
+
+// ── Shared utils ──────────────────────────────────────────────────────────────
+function migrateSlots(list){
+  return (list||[]).map(function(c){
+    return Object.assign({},c,{slots:(c.slots||[]).map(function(s){return typeof s==="string"?{day:1,time:s}:s;})});
+  });
+}
+function deepCopy(o){return JSON.parse(JSON.stringify(o));}
 function pad(n){return String(n).padStart(2,"0");}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+
+// ── LocalStorage ──────────────────────────────────────────────────────────────
+function loadConfig(){
+  try{
+    var s=localStorage.getItem(LS_KEY);
+    if(s){var d=JSON.parse(s);CSMS=migrateSlots(d.csms||DEFAULT_CSMS);if(d.duration)DURATION=d.duration;}
+    else{CSMS=migrateSlots(deepCopy(DEFAULT_CSMS));}
+  }catch(e){CSMS=migrateSlots(deepCopy(DEFAULT_CSMS));}
+}
+
+// ══════════════════ ADMIN ══════════════════
+var aCSMs=[], aSelId=null, aNewDay=1, aNewTime="";
+
+function initAdmin(){
+  aCSMs=migrateSlots(deepCopy(CSMS));
+  aSelId=aCSMs[0]?aCSMs[0].id:null;
+  refreshAdminCount();
+  renderAdminSidebar();
+  renderAdminEditor();
+}
+
+function refreshAdminCount(){
+  var el=document.getElementById("admin-count");
+  if(el) el.textContent="— "+aCSMs.filter(function(c){return c.active;}).length+" CSMs ativos";
+}
+
+function saveAdminConfig(){
+  CSMS=migrateSlots(deepCopy(aCSMs));
+  try{localStorage.setItem(LS_KEY,JSON.stringify({csms:CSMS,duration:DURATION}));}catch(e){}
+  var b=document.getElementById("saved-ok");
+  if(b){b.style.display="inline-block";setTimeout(function(){b.style.display="none";},2000);}
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
+function renderAdminSidebar(){
+  var html="";
+  aCSMs.forEach(function(c){
+    var init=c.name.split(" ").map(function(w){return w[0]||"";}).slice(0,2).join("");
+    var sel=c.id===aSelId;
+    html+='<div class="csm-item'+(sel?" sel":"")+'" onclick="selectCSM('+c.id+')">'
+      +'<div class="csm-av">'+esc(init)+'</div>'
+      +'<div style="min-width:0">'
+      +'<div style="font-size:13px;font-weight:700;color:#22367b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.name.split(" ")[0])+'</div>'
+      +'<div style="font-size:11px;color:#5a6074">'+(c.active?"Ativo":"Inativo")+'</div>'
+      +'</div></div>';
+  });
+  html+='<button class="abtn abtn-secondary abtn-sm" style="width:100%;margin-top:4px" onclick="addCSM()">+ Adicionar CSM</button>';
+  document.getElementById("admin-sidebar").innerHTML=html;
+}
+
+function selectCSM(id){aSelId=id;aNewDay=1;aNewTime="";renderAdminSidebar();renderAdminEditor();}
+
+function addCSM(){
+  var newId=Math.max.apply(null,aCSMs.map(function(c){return c.id;}).concat([0]))+1;
+  aCSMs.push({id:newId,name:"Novo CSM",email:"",icsUrl:"",projects:0,active:true,slots:[]});
+  aSelId=newId;
+  refreshAdminCount();renderAdminSidebar();renderAdminEditor();
+}
+
+function removeCSM(){
+  if(aCSMs.length<=1){alert("É necessário manter ao menos 1 CSM.");return;}
+  var csm=aCSMs.find(function(c){return c.id===aSelId;});
+  if(!confirm("Remover "+(csm?csm.name:"este CSM")+"? Esta ação não pode ser desfeita."))return;
+  aCSMs=aCSMs.filter(function(c){return c.id!==aSelId;});
+  aSelId=aCSMs[0]?aCSMs[0].id:null;
+  refreshAdminCount();renderAdminSidebar();renderAdminEditor();
+}
+
+// ── Editor ────────────────────────────────────────────────────────────────────
+function renderAdminEditor(){
+  var csm=aCSMs.find(function(c){return c.id===aSelId;});
+  if(!csm){document.getElementById("admin-content").innerHTML='<p style="color:#5a6074;font-size:14px">Selecione um CSM na sidebar.</p>';return;}
+
+  var slotsHtml=csm.slots.length
+    ?csm.slots.map(function(s,i){
+      return '<span class="slot-tag">'
+        +'<span style="font-size:10px;font-weight:800;background:#d3e2f2;border-radius:4px;padding:1px 5px">'+(DAYS_WEEK[s.day]||"?")+'</span>'
+        +esc(s.time)
+        +'<button onclick="removeSlot('+i+')" style="background:none;border:none;cursor:pointer;color:#5a6074;padding:0;font-size:14px;line-height:1">×</button>'
+        +'</span>';
+    }).join("")
+    :'<span style="font-size:13px;color:#5a6074">Nenhum horário configurado.</span>';
+
+  var dayOpts=DAYS_WEEK.slice(1).map(function(d,i){
+    return '<option value="'+(i+1)+'"'+(aNewDay===(i+1)?" selected":"")+'>'+d+'</option>';
+  }).join("");
+
+  document.getElementById("admin-content").innerHTML=
+    '<div class="admin-card">'
+    +'<div class="admin-card-title"><span class="adot"></span>Informações do CSM</div>'
+    +'<div class="fg2">'
+    +'<div><span class="fl">Nome</span><input class="fi" value="'+esc(csm.name)+'" oninput="updField(\'name\',this.value)"/></div>'
+    +'<div><span class="fl">E-mail (convidado)</span><input class="fi" value="'+esc(csm.email)+'" oninput="updField(\'email\',this.value)"/></div>'
+    +'<div class="sp2"><span class="fl">Link ICS secreto da agenda Google</span>'
+    +'<input class="fi" placeholder="https://calendar.google.com/calendar/ical/..." value="'+esc(csm.icsUrl)+'" oninput="updField(\'icsUrl\',this.value)"/></div>'
+    +'<div><span class="fl">Projetos ativos</span>'
+    +'<input class="fi" type="number" min="0" value="'+csm.projects+'" oninput="updField(\'projects\',parseInt(this.value)||0)"/></div>'
+    +'<div><span class="fl">Status</span>'
+    +'<select class="fs" onchange="updField(\'active\',this.value===\'ativo\')">'
+    +'<option value="ativo"'+(csm.active?" selected":"")+'>Ativo</option>'
+    +'<option value="inativo"'+(!csm.active?" selected":"")+'>Inativo</option>'
+    +'</select></div>'
+    +'</div></div>'
+
+    +'<div class="admin-card">'
+    +'<div class="admin-card-title"><span class="adot"></span>Horários disponíveis</div>'
+    +'<div style="margin-bottom:14px">'+slotsHtml+'</div>'
+    +'<div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">'
+    +'<div><span class="fl">Dia</span><select class="fs" style="width:100px" id="aDay" onchange="aNewDay=parseInt(this.value)">'+dayOpts+'</select></div>'
+    +'<div><span class="fl">Horário</span><input class="fi" style="width:96px" placeholder="HH:MM" id="aTime" value="'+esc(aNewTime)+'" oninput="aNewTime=this.value"/></div>'
+    +'<button class="abtn abtn-secondary abtn-sm" onclick="addSlot()">+ Adicionar</button>'
+    +'</div></div>'
+
+    +'<div style="display:flex;justify-content:flex-end">'
+    +'<button class="abtn abtn-danger abtn-sm" onclick="removeCSM()">Remover CSM</button>'
+    +'</div>';
+}
+
+function updField(field,val){
+  var csm=aCSMs.find(function(c){return c.id===aSelId;});
+  if(!csm)return;
+  csm[field]=val;
+  if(field==="name"||field==="active"){refreshAdminCount();renderAdminSidebar();}
+}
+
+function addSlot(){
+  var t=(aNewTime||"").trim();
+  if(!t.match(/^\d{2}:\d{2}$/)){alert("Informe o horário no formato HH:MM (ex: 09:30)");return;}
+  var csm=aCSMs.find(function(c){return c.id===aSelId;});
+  if(!csm)return;
+  if(csm.slots.some(function(s){return s.day===aNewDay&&s.time===t;}))return;
+  csm.slots.push({day:aNewDay,time:t});
+  csm.slots.sort(function(a,b){return a.day-b.day||a.time.localeCompare(b.time);});
+  aNewTime="";renderAdminEditor();
+}
+
+function removeSlot(idx){
+  var csm=aCSMs.find(function(c){return c.id===aSelId;});
+  if(csm){csm.slots.splice(idx,1);renderAdminEditor();}
+}
+
+// ══════════════════ BOOKING ══════════════════
+var step=1,form={school:"",contact:"",email:"",phone:"",guests:""},chosen=null,meetUrl="",availSlots=[];
+
 function fmtDate(d){return d.toLocaleDateString("pt-BR",{timeZone:"America/Sao_Paulo",weekday:"long",day:"2-digit",month:"long"});}
 function fmtTime(d){return d.toLocaleTimeString("pt-BR",{timeZone:"America/Sao_Paulo",hour:"2-digit",minute:"2-digit"});}
 function addMin(d,m){return new Date(d.getTime()+m*60000);}
+
 function buildCalendarHTML(slots){
   var byMonth={};
   for(var i=0;i<slots.length;i++){
@@ -109,63 +333,67 @@ function buildCalendarHTML(slots){
   }
   return html;
 }
+
 function renderSteps(){
-  var items=[["1","Dados"],["2","Horario"],["3","Confirmacao"]];
-  var html="";
+  var items=[["1","Dados"],["2","Horario"],["3","Confirmacao"]];var html="";
   for(var i=0;i<items.length;i++){
     var n=items[i][0],l=items[i][1],s=i+1,cls=s<step?"done":s===step?"active":"";
     html+=(i?"<div class='step-sep'></div>":"")+"<div class='step-item "+cls+"'><div class='step-num'>"+(s<step?"✓":n)+"</div>"+l+"</div>";
   }
   document.getElementById("stepsBar").innerHTML=html;
 }
+
 function renderStep1(){
   document.getElementById("content").innerHTML=
     "<div class='card'><h2>Dados da instituicao</h2><div class='form-row'>"
-    +"<div class='form-group full'><label>Nome da Instituicao *</label><input id='fs' placeholder='Ex: Escola Estadual Sao Jose' value='"+esc(form.school)+"'/></div>"
-    +"<div class='form-group'><label>Responsavel *</label><input id='fc' placeholder='Nome completo' value='"+esc(form.contact)+"'/></div>"
-    +"<div class='form-group'><label>Telefone *</label><input id='fp' placeholder='(48) 9 9999-9999' value='"+esc(form.phone)+"'/></div>"
-    +"<div class='form-group full'><label>E-mail do responsavel *</label><input id='fe' type='email' placeholder='responsavel@escola.edu.br' value='"+esc(form.email)+"'/></div>"
-    +"<div class='form-group full'><label>Convidados adicionais</label><input id='fg' placeholder='email1@ex.com, email2@ex.com' value='"+esc(form.guests)+"'/></div>"
-    +"</div><div style='margin-top:8px;padding:10px 14px;background:#fffbea;border:1px solid rgba(255,202,38,.4);border-radius:8px;font-size:13px;color:#92400e'>Reuniao de Treinamento - duracao de "+DURATION+" minutos</div>"
+    +"<div class='form-group full'><label>Nome da Instituicao *</label><input type='text' id='fs' placeholder='Ex: Escola Estadual Sao Jose' value='"+esc(form.school)+"'/></div>"
+    +"<div class='form-group'><label>Responsavel *</label><input type='text' id='fc' placeholder='Nome completo' value='"+esc(form.contact)+"'/></div>"
+    +"<div class='form-group'><label>Telefone *</label><input type='tel' id='fp' placeholder='(48) 9 9999-9999' value='"+esc(form.phone)+"'/></div>"
+    +"<div class='form-group full'><label>E-mail do responsavel *</label><input type='email' id='fe' placeholder='responsavel@escola.edu.br' value='"+esc(form.email)+"'/></div>"
+    +"<div class='form-group full'><label>Convidados adicionais</label><input type='text' id='fg' placeholder='email1@ex.com, email2@ex.com' value='"+esc(form.guests)+"'/></div>"
+    +"</div><div style='margin-top:8px;padding:10px 14px;background:#fffbea;border:1px solid rgba(255,202,38,.4);border-radius:8px;font-size:13px;color:#92400e'>Reuniao de Treinamento — duracao de "+DURATION+" minutos</div>"
     +"<div style='margin-top:20px'><button class='btn btn-primary' onclick='goStep2()'>Ver horarios disponiveis</button></div></div>";
 }
+
 function gv(id){var el=document.getElementById(id);return el?el.value.trim():"";}
+
 async function goStep2(){
   form={school:gv("fs"),contact:gv("fc"),email:gv("fe"),phone:gv("fp"),guests:gv("fg")};
   if(!form.school||!form.contact||!form.email||!form.phone){alert("Preencha todos os campos obrigatorios.");return;}
   step=2;renderSteps();
-  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><p style='color:#5a6074;font-size:13px'>Verificando disponibilidade nas agendas...</p><div style='display:flex;justify-content:center;padding:20px 0'><div style='width:36px;height:36px;border:3px solid #d3e2f2;border-top-color:#22367b;border-radius:50%;animation:spin .7s linear infinite'></div></div></div>";
+  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><p style='font-size:13px;color:#5a6074;margin-bottom:8px'>Verificando disponibilidade nas agendas...</p><div style='display:flex;justify-content:center;padding:20px 0'><div style='width:36px;height:36px;border:3px solid #d3e2f2;border-top-color:#22367b;border-radius:50%;animation:spin .7s linear infinite'></div></div></div>";
   try{
     var r=await fetch(WEBHOOK_CHECK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({})});
-    var text=await r.text();
-    if(!text||!text.trim())throw new Error("empty");
-    var data=JSON.parse(text);
-    if(!data.success)throw new Error("error");
-    availSlots=(data.days||[]).flatMap(function(d){
-      return(d.slots||[]).map(function(s){
-        return{datetime:d.date+"T"+s.time+":00-03:00",csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};
-      });
-    });
+    var text=await r.text();if(!text||!text.trim())throw new Error("empty");
+    var data=JSON.parse(text);if(!data.success)throw new Error("error");
+    availSlots=(data.days||[]).flatMap(function(d){return(d.slots||[]).map(function(s){return{datetime:d.date+"T"+s.time+":00-03:00",csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};});});
     if(!availSlots.length)throw new Error("empty");
   }catch(e){
-    document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><div class='alert'>Nenhum horario disponivel nos proximos 60 dias. Entre em contato conosco.</div><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div>";
+    document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><div class='alert-box'>Nenhum horario disponivel nos proximos 60 dias. Entre em contato conosco.</div><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div>";
     return;
   }
   renderStep2();
 }
+
 function renderStep2(){
-  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><p style='font-size:12px;color:#5a6074;margin:-8px 0 16px;display:flex;align-items:center;gap:4px'>🕐 Horários no fuso de Brasília (UTC-3)</p>"+buildCalendarHTML(availSlots)+"<div style='margin-top:8px'><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div></div>";
+  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2>"
+    +"<p style='font-size:12px;color:#5a6074;margin:-8px 0 16px;display:flex;align-items:center;gap:5px'>"
+    +"<span style='width:8px;height:8px;border-radius:50%;background:#10ccea;display:inline-block'></span>"
+    +"Horarios no fuso de Brasilia (UTC-3)</p>"
+    +buildCalendarHTML(availSlots)
+    +"<div style='margin-top:8px'><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div></div>";
 }
+
 function selectSlot(i){
   chosen=availSlots[i];step=3;renderSteps();
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
   var rows=[["Instituicao",form.school],["Responsavel",form.contact],["E-mail",form.email],["Telefone",form.phone]];
   if(form.guests)rows.push(["Convidados",form.guests]);
   rows.push(["Data",fmtDate(dt)],["Horario",fmtTime(dt)+" - "+fmtTime(end)],["Duracao",DURATION+" minutos"]);
-  var rowsHtml="";
-  for(var ri=0;ri<rows.length;ri++){rowsHtml+="<div class='summary-row'><span>"+rows[ri][0]+"</span><span>"+esc(String(rows[ri][1]))+"</span></div>";}
-  document.getElementById("content").innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rowsHtml+"</div><div class='alert'>Ao confirmar, voce recebera um convite do Google Calendar com o link da reuniao.</div><div id='err3'></div><div style='display:flex;gap:10px'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento</button></div></div>";
+  var rh="";for(var ri=0;ri<rows.length;ri++){rh+="<div class='summary-row'><span>"+rows[ri][0]+"</span><span>"+esc(String(rows[ri][1]))+"</span></div>";}
+  document.getElementById("content").innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rh+"</div><div class='alert-box'>Ao confirmar, voce recebera um convite do Google Calendar com o link da reuniao.</div><div id='err3'></div><div style='display:flex;gap:10px'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento</button></div></div>";
 }
+
 async function confirmar(){
   var btn=document.getElementById("btnC");btn.disabled=true;btn.textContent="Confirmando...";
   try{
@@ -174,45 +402,45 @@ async function confirmar(){
       date:chosen.datetime.split("T")[0],time:chosen.datetime.split("T")[1].slice(0,5),
       csmEmail:chosen.csmEmail,csmName:chosen.csmName,calendarId:"primary"};
     var r=await fetch(WEBHOOK_BOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-    var text=await r.text();
-    if(!text||!text.trim())throw new Error("Webhook nao retornou resposta.");
-    var data=JSON.parse(text);
-    if(!data.success)throw new Error(data.error||"Erro no webhook");
-    meetUrl=data.meetLink||"";
-    renderSuccess();
+    var text=await r.text();if(!text||!text.trim())throw new Error("Webhook nao retornou resposta.");
+    var data=JSON.parse(text);if(!data.success)throw new Error(data.error||"Erro no webhook");
+    meetUrl=data.meetLink||"";renderSuccess();
   }catch(e){
     btn.disabled=false;btn.textContent="Confirmar agendamento";
     document.getElementById("err3").innerHTML="<div class='error-box'>Erro: "+esc(e.message)+"</div>";
   }
 }
+
 function renderSuccess(){
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
   document.getElementById("stepsBar").style.display="none";
-  var meetHtml="";
+  var mh="";
   if(meetUrl){
-    meetHtml="<div class='meet-link-box'><strong>Link da reuniao</strong>"
-      +"<div style='display:flex;align-items:center;gap:8px;margin-top:4px'>"
-      +"<span style='flex:1;word-break:break-all;font-size:13px;color:#22367b'>"+meetUrl+"</span>"
-      +"<button onclick=\"navigator.clipboard.writeText('"+meetUrl+"').then(function(){this.textContent='Copiado!';var self=this;setTimeout(function(){self.textContent='Copiar'},2000)}.bind(this))\" style='flex-shrink:0;padding:6px 14px;border-radius:6px;border:1.5px solid #d3e2f2;background:#fff;color:#22367b;font-weight:700;font-size:12px;cursor:pointer;font-family:Nunito,sans-serif'>Copiar</button>"
-      +"</div></div>";
+    mh="<div class='meet-link-box'><strong>Link da reuniao</strong><div style='display:flex;align-items:center;gap:8px;margin-top:4px'><span style='flex:1;word-break:break-all;font-size:13px;color:#22367b'>"+meetUrl+"</span><button onclick=\"navigator.clipboard.writeText('"+meetUrl+"').then(function(){this.textContent='Copiado!';var self=this;setTimeout(function(){self.textContent='Copiar'},2000)}.bind(this))\" style='flex-shrink:0;padding:6px 14px;border-radius:6px;border:1.5px solid #d3e2f2;background:#fff;color:#22367b;font-weight:700;font-size:12px;cursor:pointer;font-family:Nunito,sans-serif'>Copiar</button></div></div>";
   }
-  document.getElementById("content").innerHTML="<div class='success-card card'>"
-    +"<div class='success-icon'>🎉</div>"
-    +"<h2>Agendamento confirmado!</h2>"
-    +"<p class='sub'><strong>"+esc(form.school)+"</strong><br>"
-    +fmtDate(dt)+" - "+fmtTime(dt)+" - "+fmtTime(end)+"<br>"
-    +"CSM responsavel: <strong>"+esc(chosen.csmName)+"</strong><br>"
-    +"Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"
-    +meetHtml
-    +"<button class='new-btn' onclick='resetAll()'>Fazer novo agendamento</button></div>";
+  document.getElementById("content").innerHTML="<div class='success-card card'><div class='success-icon'>🎉</div><h2>Agendamento confirmado!</h2><p class='sub'><strong>"+esc(form.school)+"</strong><br>"+fmtDate(dt)+" - "+fmtTime(dt)+" - "+fmtTime(end)+"<br>CSM responsavel: <strong>"+esc(chosen.csmName)+"</strong><br>Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"+mh+"<button class='new-btn' onclick='resetAll()'>Fazer novo agendamento</button></div>";
 }
+
 function resetAll(){
-  step=1;form={school:"",contact:"",email:"",phone:"",guests:""};
-  chosen=null;meetUrl="";
-  document.getElementById("stepsBar").style.display="";
+  step=1;form={school:"",contact:"",email:"",phone:"",guests:""};chosen=null;meetUrl="";
+  document.getElementById("stepsBar").style.display="";renderSteps();renderStep1();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadConfig();
+if(window.location.search.indexOf("admin")!==-1){
+  var unlocked=sessionStorage.getItem("admin_ok");
+  if(!unlocked){
+    var pwd=prompt("Senha de acesso ao painel administrativo:");
+    if(pwd!=="Clip@CSM2026"){alert("Senha incorreta.");window.location.href=".";}
+    else{sessionStorage.setItem("admin_ok","1");}
+  }
+  document.getElementById("page-booking").style.display="none";
+  document.getElementById("page-admin").style.display="block";
+  initAdmin();
+}else{
   renderSteps();renderStep1();
 }
-renderSteps();renderStep1();
 </script>
 </body>
 </html>
