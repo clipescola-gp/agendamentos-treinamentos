@@ -125,10 +125,8 @@ footer{text-align:center;padding:32px;color:var(--gray);font-size:12px;border-to
 
 <script>
 // ── Config ────────────────────────────────────────────────────────────────────
-var WEBHOOK_CHECK      = "https://n8n.clipescola.com.br/webhook/verificar-disponibilidade";
-var WEBHOOK_BOOK       = "https://n8n.clipescola.com.br/webhook/agendar-implantacao";
-var WEBHOOK_GET_CONFIG = "https://n8n.clipescola.com.br/webhook/get-config";
-var WEBHOOK_SAVE_CONFIG= "https://n8n.clipescola.com.br/webhook/save-config";
+var WEBHOOK_CHECK = "https://n8n.clipescola.com.br/webhook/verificar-disponibilidade";
+var WEBHOOK_BOOK  = "https://n8n.clipescola.com.br/webhook/agendar-implantacao";
 var DURATION = 120;
 var LS_KEY   = "csm_config_v1";
 var DAYS_WEEK = ["","Seg","Ter","Qua","Qui","Sex"];
@@ -156,18 +154,7 @@ function pad(n){return String(n).padStart(2,"0");}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
 
 // ── LocalStorage ──────────────────────────────────────────────────────────────
-async function loadConfig(){
-  // 1. tenta carregar do n8n (fonte principal)
-  try{
-    var r=await fetch(WEBHOOK_GET_CONFIG);
-    var data=await r.json();
-    if(data.success&&data.config&&data.config.csms&&data.config.csms.length){
-      CSMS=migrateSlots(data.config.csms);
-      if(data.config.duration)DURATION=data.config.duration;
-      return;
-    }
-  }catch(e){}
-  // 2. fallback: localStorage
+function loadConfig(){
   try{
     var s=localStorage.getItem(LS_KEY);
     if(s){var d=JSON.parse(s);CSMS=migrateSlots(d.csms||DEFAULT_CSMS);if(d.duration)DURATION=d.duration;}
@@ -191,13 +178,8 @@ function refreshAdminCount(){
   if(el) el.textContent="— "+aCSMs.filter(function(c){return c.active;}).length+" CSMs ativos";
 }
 
-async function saveAdminConfig(){
+function saveAdminConfig(){
   CSMS=migrateSlots(deepCopy(aCSMs));
-  // salva no n8n (fonte principal)
-  try{
-    await fetch(WEBHOOK_SAVE_CONFIG,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({config:{csms:CSMS,duration:DURATION}})});
-  }catch(e){}
-  // salva no localStorage como backup
   try{localStorage.setItem(LS_KEY,JSON.stringify({csms:CSMS,duration:DURATION}));}catch(e){}
   var b=document.getElementById("saved-ok");
   if(b){b.style.display="inline-block";setTimeout(function(){b.style.display="none";},2000);}
@@ -445,21 +427,20 @@ function resetAll(){
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-loadConfig().then(function(){
-  if(window.location.search.indexOf("admin")!==-1){
-    var unlocked=sessionStorage.getItem("admin_ok");
-    if(!unlocked){
-      var pwd=prompt("Senha de acesso ao painel administrativo:");
-      if(pwd!=="Clip@CSM2026"){alert("Senha incorreta.");window.location.href=".";return;}
-      sessionStorage.setItem("admin_ok","1");
-    }
-    document.getElementById("page-booking").style.display="none";
-    document.getElementById("page-admin").style.display="block";
-    initAdmin();
-  }else{
-    renderSteps();renderStep1();
+loadConfig();
+if(window.location.search.indexOf("admin")!==-1){
+  var unlocked=sessionStorage.getItem("admin_ok");
+  if(!unlocked){
+    var pwd=prompt("Senha de acesso ao painel administrativo:");
+    if(pwd!=="Clip@CSM2026"){alert("Senha incorreta.");window.location.href=".";}
+    else{sessionStorage.setItem("admin_ok","1");}
   }
-});
+  document.getElementById("page-booking").style.display="none";
+  document.getElementById("page-admin").style.display="block";
+  initAdmin();
+}else{
+  renderSteps();renderStep1();
+}
 </script>
 </body>
 </html>
