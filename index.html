@@ -445,21 +445,27 @@ function resetAll(){
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-loadConfig().then(function(){
-  if(window.location.search.indexOf("admin")!==-1){
-    var unlocked=sessionStorage.getItem("admin_ok");
-    if(!unlocked){
-      var pwd=prompt("Senha de acesso ao painel administrativo:");
-      if(pwd!=="Clip@CSM2026"){alert("Senha incorreta.");window.location.href=".";return;}
+var isAdmin = window.location.search.indexOf("admin") !== -1;
+
+if(isAdmin){
+  var unlocked = sessionStorage.getItem("admin_ok");
+  if(!unlocked){
+    var pwd = prompt("Senha de acesso ao painel administrativo:");
+    if(pwd !== "Clip@CSM2026"){
+      alert("Senha incorreta.");
+      window.location.href = ".";
+    } else {
       sessionStorage.setItem("admin_ok","1");
     }
-    document.getElementById("page-booking").style.display="none";
-    document.getElementById("page-admin").style.display="block";
-    initAdmin();
-  }else{
-    renderSteps();renderStep1();
   }
-});
+  if(sessionStorage.getItem("admin_ok")){
+    document.getElementById("page-booking").style.display = "none";
+    document.getElementById("page-admin").style.display = "block";
+    loadConfig().then(function(){ initAdmin(); });
+  }
+} else {
+  loadConfig().then(function(){ renderSteps(); renderStep1(); });
+}
 </script>
 </body>
 </html>
