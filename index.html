@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ClipEscola - Agendar Treinamento</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Treinamento ClipEscola – Agendamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#22367b;--blue2:#1a2d6b;--yellow:#ffca26;--light:#d3e2f2;--gray:#5a6074;--bg:#f5f7fb;--radius:12px;--shadow:0 4px 24px rgba(34,54,123,.10)}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--blue);min-height:100vh}
-header{background:var(--blue);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#22367b;--blue2:#1a2d6b;--yellow:#ffca26;--light:#d3e2f2;--gray:#5a6074;--bg:#f5f7fb;--radius:12px}
+body{font-family:Nunito,sans-serif;background:var(--bg);color:var(--blue);min-height:100vh}
+.hd{display:none!important}
+
+/* ── Header ── */
+.hdr{background:var(--blue);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.hdr img{height:36px;object-fit:contain}
 .badge{background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.4);color:var(--yellow);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
-/* Booking */
+#admin-gear{position:absolute;right:12px;bottom:6px;font-size:11px;color:rgba(255,255,255,.2);cursor:pointer;user-select:none;display:block}
+
+/* ── Hero ── */
 .hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue2) 100%);padding:48px 32px 56px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,202,38,.07);top:-80px;right:-80px}
+.hero::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,202,38,.07);top:-80px;right:-60px}
 .hero-tag{display:inline-block;background:rgba(255,202,38,.15);border:1px solid rgba(255,202,38,.35);color:var(--yellow);font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
-.hero h1{color:#fff;font-size:28px;font-weight:800;margin-bottom:8px}
+.hero h1{color:#fff;font-size:28px;font-weight:800;margin-bottom:4px}
+.hero .hero-sub{color:rgba(255,255,255,.6);font-size:14px;margin-bottom:10px}
 .hero p{color:rgba(255,255,255,.75);font-size:15px;max-width:480px;margin:0 auto 20px}
-.steps-bar{background:#fff;border-bottom:1px solid var(--light);padding:16px 32px;display:flex;align-items:center;justify-content:center}
-.step-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--gray)}
-.step-item.active{color:var(--blue)}.step-item.done{color:#057a55}
-.step-num{width:26px;height:26px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
-.step-item.active .step-num{background:var(--blue);border-color:var(--blue);color:#fff}
-.step-item.done .step-num{background:#057a55;border-color:#057a55;color:#fff}
-.step-sep{width:32px;height:2px;background:var(--light);margin:0 4px}
-.main{max-width:680px;margin:0 auto;padding:32px 24px}
-.card{background:#fff;border:1px solid var(--light);border-radius:var(--radius);padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.hero-meta{display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:8px 20px;color:#fff;font-size:13px;font-weight:700}
+.hero-steps{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:20px}
+.hero-step{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:7px 16px;color:rgba(255,255,255,.85);font-size:12px;font-weight:700}
+.hs-n{background:var(--yellow);color:var(--blue);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+/* ── Booking layout ── */
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px}
+.card{background:#fff;border:1px solid var(--light);border-radius:var(--radius);padding:28px;margin-bottom:20px;box-shadow:0 4px 24px rgba(34,54,123,.08)}
 .card h2{font-size:17px;font-weight:800;margin-bottom:20px;color:var(--blue)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
 .form-group.full{grid-column:1/-1}
 label{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px}
-input[type=text],input[type=email],input[type=tel]{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none;transition:border .2s}
+input[type=text],input[type=email],input[type=tel]{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:Nunito,sans-serif;outline:none;transition:border .2s}
 input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus{border-color:var(--blue)}
-.btn{display:inline-block;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:'Nunito',sans-serif}
+.btn{display:inline-block;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:Nunito,sans-serif}
 .btn-primary{background:var(--blue);color:#fff}.btn-primary:disabled{opacity:.45;cursor:not-allowed}
 .btn-secondary{background:#fff;color:var(--blue);border:1.5px solid var(--light)}
 .summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--light);font-size:14px}
@@ -46,115 +51,155 @@ input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus{border-colo
 .success-card .sub{color:var(--gray);font-size:14px;line-height:1.7;margin-bottom:24px}
 .meet-link-box{background:var(--bg);border:1.5px solid var(--light);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gray);word-break:break-all;margin-bottom:20px;text-align:left}
 .meet-link-box strong{display:block;margin-bottom:4px;color:var(--blue);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-.new-btn{background:none;border:1.5px solid var(--light);color:var(--gray);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Nunito',sans-serif}
-footer{text-align:center;padding:32px;color:var(--gray);font-size:12px;border-top:1px solid var(--light);margin-top:16px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}.form-group.full{grid-column:auto}.hero h1{font-size:22px}.main{padding:20px 16px}}
-/* Login */
-.login-wrap{display:flex;justify-content:center;align-items:center;min-height:calc(100vh - 64px);background:var(--bg)}
-.login-box{background:#fff;border:1px solid var(--light);border-radius:16px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(34,54,123,.12);text-align:center}
-.login-box h2{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:6px}
-.login-box p{font-size:13px;color:var(--gray);margin-bottom:24px}
-.login-pwd{width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:15px;font-family:'Nunito',sans-serif;outline:none;margin-bottom:12px;text-align:center;letter-spacing:3px}
-.login-pwd:focus{border-color:var(--blue)}
-/* Admin */
-.admin-subbar{background:#fff;border-bottom:1px solid var(--light);padding:10px 32px;display:flex;align-items:center;gap:8px}
-.admin-layout{display:flex;min-height:calc(100vh - 128px)}
-.admin-sidebar-panel{width:224px;background:#fff;border-right:1px solid var(--light);padding:16px;flex-shrink:0}
-.admin-content{flex:1;padding:28px 32px;background:var(--bg);overflow-y:auto}
-.admin-card{background:#fff;border:1px solid var(--light);border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(34,54,123,.07)}
-.admin-card-title{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:18px;display:flex;align-items:center;gap:8px}
-.adot{width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;display:inline-block}
-.csm-item{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;cursor:pointer;margin-bottom:6px;border:1.5px solid transparent}
-.csm-item.sel{background:#fff;border-color:var(--light)}
-.csm-item:not(.sel){background:var(--bg)}
-.csm-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;flex-shrink:0}
+.new-btn{background:none;border:1.5px solid var(--light);color:var(--gray);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;font-family:Nunito,sans-serif}
+
+/* ── Admin ── */
+.adm-wrap{max-width:940px;margin:0 auto;padding:24px 16px}
+.adm-header{background:#fff;border-radius:var(--radius);padding:16px 20px;margin-bottom:4px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.adm-header-info{font-size:14px;font-weight:700;color:var(--blue)}
+.adm-status{display:inline-block;background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.tab-nav{display:flex;border-bottom:2px solid #e5e7eb;margin-bottom:0;background:#fff;border-radius:var(--radius) var(--radius) 0 0;padding:0 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow-x:auto}
+.tab-btn{padding:14px 18px;font-size:13px;font-weight:700;color:var(--gray);background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:Nunito,sans-serif;white-space:nowrap;transition:color .15s}
+.tab-btn:hover{color:var(--blue)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-panel{background:#fff;border-radius:0 0 var(--radius) var(--radius);padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);display:none}
+.tab-panel.active{display:block}
+.section-ttl{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #f3f4f6}
+.adm-msg-bar{border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;margin-top:12px;display:none}
+.adm-msg-bar.ok{background:#ecfdf5;color:#057a55;border:1px solid #6ee7b7}
+.adm-msg-bar.err{background:#fef2f2;color:#dc2626;border:1px solid #fca5a5}
+/* CSM editor */
+.csm-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.csm-chip{padding:7px 16px;border-radius:8px;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;font-family:Nunito,sans-serif;transition:all .15s}
+.csm-chip:hover{border-color:var(--blue);color:var(--blue)}
+.csm-chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
 .fg2 .sp2{grid-column:1/-1}
 .fl{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px}
-.fi{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none}
+.fi{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:Nunito,sans-serif;outline:none}
 .fi:focus{border-color:var(--blue)}
-.fs{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:'Nunito',sans-serif;outline:none}
+.fs{width:100%;padding:10px 13px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:14px;font-family:Nunito,sans-serif;outline:none}
 .slot-tag{background:#eef2ff;border:1px solid #c5d8f8;border-radius:6px;padding:3px 10px;font-size:12px;display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-weight:700;margin:2px 4px 4px 0}
-.abtn{display:inline-block;padding:11px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:'Nunito',sans-serif;text-decoration:none}
+.abtn{display:inline-block;padding:11px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:14px;font-family:Nunito,sans-serif}
 .abtn-primary{background:var(--blue);color:#fff}
 .abtn-secondary{background:#fff;color:var(--blue);border:1.5px solid var(--light)}
 .abtn-sm{padding:9px 16px;font-size:13px}
 .abtn-danger{background:#fde8e8;color:#c81e1e;border:1.5px solid #f8b4b4}
-.saved-ok{background:#def7ec;color:#057a55;border:1px solid #84e1bc;border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;display:none}
+/* Login */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 64px);padding:24px}
+.login-box{background:#fff;border-radius:14px;padding:32px;width:100%;max-width:340px;box-shadow:0 4px 20px rgba(0,0,0,.1);text-align:center}
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;z-index:300;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}.form-group.full{grid-column:auto}.hero h1{font-size:22px}.wrap,.adm-wrap{padding:20px 12px}.tab-panel,.card{padding:16px}.fg2{grid-template-columns:1fr}.fg2 .sp2{grid-column:auto}}
 </style>
 </head>
 <body>
 
-<!-- ══ BOOKING ══ -->
-<div id="page-booking" style="display:none">
-  <header>
-    <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
-    <div class="badge">Treinamento</div>
-  </header>
+<!-- ══ HEADER ══ -->
+<div class="hdr">
+  <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" onerror="this.style.display='none'">
+  <div class="badge" id="hdr-badge">Treinamento</div>
+  <span id="admin-gear" onclick="goAdmin()" title="Retaguarda">⚙</span>
+</div>
+
+<!-- ══════════════════ PÚBLICO ══════════════════ -->
+<div id="view-public">
   <div class="hero">
-    <div class="hero-tag">Reunião de Treinamento</div>
-    <h1>Agende sua reunião de treinamento</h1>
+    <div class="hero-tag">Agendamentos ClipEscola</div>
+    <h1>Treinamento ClipEscola</h1>
+    <div class="hero-sub">Equipe de Customer Success</div>
     <p>Escolha o melhor horário e nossa equipe estará pronta para iniciar sua jornada com a ClipEscola.</p>
+    <div class="hero-meta">🕐 2 horas &nbsp;·&nbsp; 🌎 Horário de Brasília</div>
+    <div class="hero-steps">
+      <div class="hero-step"><span class="hs-n">1</span><span>Preencha seus dados</span></div>
+      <div class="hero-step"><span class="hs-n">2</span><span>Escolha data e horário</span></div>
+      <div class="hero-step"><span class="hs-n">3</span><span>Confirme o agendamento</span></div>
+    </div>
   </div>
-  <div class="steps-bar" id="stepsBar"></div>
-  <div class="main"><div id="content"></div></div>
-  <footer>
-    ClipEscola · Agendamento de Treinamento
-    <a href="?admin" style="margin-left:12px;color:var(--light);font-size:12px;text-decoration:none;opacity:.4" title="Admin">⚙</a>
-  </footer>
+  <div id="stepsBar" style="background:#fff;border-bottom:1px solid var(--light);padding:16px 32px;display:flex;align-items:center;justify-content:center;gap:0"></div>
+  <div class="wrap"><div id="content"></div></div>
 </div>
 
-<!-- ══ LOGIN ══ -->
-<div id="page-login" style="display:none">
-  <header>
-    <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
-    <div class="badge">Retaguarda</div>
-  </header>
-  <div class="login-wrap">
+<!-- ══════════════════ ADMIN ══════════════════ -->
+<div id="view-admin" class="hd">
+
+  <!-- Login -->
+  <div class="login-wrap" id="adm-login">
     <div class="login-box">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">🔒</div>
-      <h2>Painel Administrativo</h2>
-      <p>ClipEscola · Agendamento de Treinamento</p>
-      <input class="login-pwd" type="password" id="login-pwd" placeholder="••••••••••••" autocomplete="current-password"/>
-      <button class="abtn abtn-primary" style="width:100%;padding:13px;font-size:15px" onclick="doLogin()">Entrar</button>
-      <p id="login-err" style="color:#c81e1e;font-size:13px;margin-top:12px;display:none">Senha incorreta. Tente novamente.</p>
+      <div style="font-size:36px;margin-bottom:10px">🔐</div>
+      <div style="font-size:17px;font-weight:800;color:var(--blue);margin-bottom:4px">Retaguarda</div>
+      <div style="font-size:13px;color:var(--gray);margin-bottom:20px">Treinamento – ClipEscola</div>
+      <input type="password" id="adm-pw" placeholder="Senha" style="width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid var(--light);background:var(--bg);color:var(--blue);font-size:15px;font-family:Nunito,sans-serif;outline:none;margin-bottom:12px;letter-spacing:3px" autocomplete="off">
+      <button class="abtn abtn-primary" style="width:100%;padding:13px" onclick="checkPw()">Entrar</button>
+      <p id="pw-err" style="color:#c81e1e;font-size:12px;margin-top:8px;display:none">Senha incorreta.</p>
+    </div>
+  </div>
+
+  <!-- Painel -->
+  <div id="adm-panel" class="hd">
+    <div class="adm-wrap">
+
+      <div class="adm-header">
+        <div class="adm-header-info">Configurações — <span id="adm-count">Treinamento</span></div>
+        <span class="adm-status">● Ativo</span>
+      </div>
+
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('csms')"   id="tab-csms">👥 Equipe de CSMs</button>
+        <button class="tab-btn"        onclick="switchTab('config')" id="tab-config">⚙️ Configurações</button>
+      </div>
+
+      <!-- Aba: CSMs -->
+      <div class="tab-panel active" id="panel-csms">
+        <div class="section-ttl">👥 Equipe de CSMs</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+          <div class="csm-selector" id="csm-chips"></div>
+          <div style="display:flex;gap:8px">
+            <button class="abtn abtn-secondary abtn-sm" onclick="addCSM()">+ Adicionar CSM</button>
+            <button class="abtn abtn-primary abtn-sm" onclick="saveAdminConfig()">💾 Salvar</button>
+          </div>
+        </div>
+        <div id="csm-editor"></div>
+        <div class="adm-msg-bar" id="msg-csms"></div>
+      </div>
+
+      <!-- Aba: Configurações -->
+      <div class="tab-panel" id="panel-config">
+        <div class="section-ttl">● Configurações do sistema</div>
+        <div class="fg2">
+          <div class="sp2"><span class="fl">Webhook Verificar</span><input class="fi" readonly value="https://n8n.clipescola.com.br/webhook/verificar-disponibilidade"></div>
+          <div class="sp2"><span class="fl">Webhook Agendar</span><input class="fi" readonly value="https://n8n.clipescola.com.br/webhook/agendar-implantacao"></div>
+          <div><span class="fl">Duração (min)</span><input class="fi" readonly value="120"></div>
+          <div><span class="fl">Senha Admin</span><input class="fi" id="c-pw" type="text" placeholder="Clip@CSM2026"></div>
+        </div>
+        <div class="adm-msg-bar" id="msg-config"></div>
+      </div>
+
+      <div style="margin-top:8px">
+        <button class="abtn abtn-secondary abtn-sm" onclick="goPublic()">← Voltar ao site</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ ADMIN ══ -->
-<div id="page-admin" style="display:none">
-  <header>
-    <img src="https://i.imgur.com/IVPOWqc.png" alt="ClipEscola" style="height:36px;object-fit:contain"/>
-    <div class="badge">Retaguarda</div>
-  </header>
-  <div class="admin-subbar">
-    <span style="font-size:13px;font-weight:700;color:var(--blue)">Agendamento de Treinamento</span>
-    <span id="admin-count" style="font-size:13px;color:var(--gray);margin-left:4px"></span>
-    <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
-      <span id="saved-ok" class="saved-ok">✓ Salvo!</span>
-      <a href="." class="abtn abtn-secondary abtn-sm">← Ver página pública</a>
-      <button class="abtn abtn-primary abtn-sm" onclick="saveAdminConfig()">Salvar configurações</button>
-    </div>
-  </div>
-  <div class="admin-layout">
-    <div class="admin-sidebar-panel" id="admin-sidebar"></div>
-    <div class="admin-content" id="admin-content"></div>
-  </div>
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ── Config ────────────────────────────────────────────────────────────────────
+// ═══ ENDPOINTS (inalterados) ══════════════════════════════════════════════════
 var WEBHOOK_CHECK       = "https://n8n.clipescola.com.br/webhook/verificar-disponibilidade";
 var WEBHOOK_BOOK        = "https://n8n.clipescola.com.br/webhook/agendar-implantacao";
 var WEBHOOK_GET_CONFIG  = "https://n8n.clipescola.com.br/webhook/get-config-csm";
 var WEBHOOK_SAVE_CONFIG = "https://n8n.clipescola.com.br/webhook/save-config-csm";
 var DURATION  = 120;
 var LS_KEY    = "csm_config_v1";
+var ADMIN_PW  = "Clip@CSM2026";
+// ═════════════════════════════════════════════════════════════════════════════
+
 var DAYS_WEEK = ["","Seg","Ter","Qua","Qui","Sex"];
 var DAYS_PT   = ["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
-var MONTHS_PT = ["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+var MONTHS_PT = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
 var DEFAULT_CSMS = [
   {id:1,name:"Alini Farias",      email:"alini.clipescola@gmail.com",         icsUrl:"https://calendar.google.com/calendar/ical/alini.clipescola%40gmail.com/private-45146bbd5a547df23dfcf600d0d55e95/basic.ics",      projects:41,active:true,slots:[{day:1,time:"09:30"},{day:1,time:"14:30"},{day:2,time:"09:00"},{day:2,time:"14:30"},{day:3,time:"09:30"},{day:3,time:"14:30"},{day:4,time:"09:00"},{day:4,time:"14:30"},{day:5,time:"09:30"},{day:5,time:"14:00"}]},
@@ -165,7 +210,7 @@ var DEFAULT_CSMS = [
 ];
 var CSMS = [];
 
-// ── Utils ─────────────────────────────────────────────────────────────────────
+// ── Utils (inalterados) ───────────────────────────────────────────────────────
 function migrateSlots(list){
   return (list||[]).map(function(c){
     return Object.assign({},c,{slots:(c.slots||[]).map(function(s){return typeof s==="string"?{day:1,time:s}:s;})});
@@ -174,8 +219,12 @@ function migrateSlots(list){
 function deepCopy(o){return JSON.parse(JSON.stringify(o));}
 function pad(n){return String(n).padStart(2,"0");}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+function toast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show');},2500);}
+function showEl(id){document.getElementById(id).classList.remove('hd');}
+function hideEl(id){document.getElementById(id).classList.add('hd');}
+function showMsg(id,msg,isOk){var el=document.getElementById(id);el.textContent=msg;el.className='adm-msg-bar '+(isOk?'ok':'err');el.style.display='block';setTimeout(function(){el.style.display='none';},4000);}
 
-// ── Config load/save ──────────────────────────────────────────────────────────
+// ── Config load/save (inalterados) ────────────────────────────────────────────
 async function loadConfig(){
   try{
     var r=await fetch(WEBHOOK_GET_CONFIG);
@@ -193,94 +242,101 @@ async function loadConfig(){
   }catch(e){CSMS=migrateSlots(deepCopy(DEFAULT_CSMS));}
 }
 
-// ══ LOGIN ═════════════════════════════════════════════════════════════════════
-function doLogin(){
-  var pwd=document.getElementById("login-pwd").value;
-  if(pwd==="Clip@CSM2026"){
-    sessionStorage.setItem("admin_ok","1");
-    document.getElementById("page-login").style.display="none";
-    document.getElementById("page-admin").style.display="block";
-    loadConfig().then(function(){initAdmin();});
+// ── Routing ───────────────────────────────────────────────────────────────────
+function goAdmin(){
+  hideEl('view-public');showEl('view-admin');
+  document.getElementById('hdr-badge').textContent='Retaguarda';
+  document.getElementById('admin-gear').style.visibility='hidden';
+}
+function goPublic(){
+  hideEl('view-admin');showEl('view-public');
+  document.getElementById('hdr-badge').textContent='Treinamento';
+  document.getElementById('admin-gear').style.visibility='visible';
+  location.hash='';
+}
+function switchTab(t){
+  ['csms','config'].forEach(function(id){
+    document.getElementById('panel-'+id).classList.remove('active');
+    document.getElementById('tab-'+id).classList.remove('active');
+  });
+  document.getElementById('panel-'+t).classList.add('active');
+  document.getElementById('tab-'+t).classList.add('active');
+}
+
+// ── Admin: Auth ───────────────────────────────────────────────────────────────
+function checkPw(){
+  var pw=document.getElementById('adm-pw').value;
+  var stored=(typeof ADMIN_PW!=='undefined')?ADMIN_PW:'Clip@CSM2026';
+  if(pw===stored){
+    hideEl('adm-login');showEl('adm-panel');
+    initAdmin();
   }else{
-    document.getElementById("login-err").style.display="block";
-    document.getElementById("login-pwd").value="";
-    document.getElementById("login-pwd").focus();
+    document.getElementById('pw-err').style.display='block';
   }
 }
 
-// ══ ADMIN ═════════════════════════════════════════════════════════════════════
+// ── Admin: CSM editor ─────────────────────────────────────────────────────────
 var aCSMs=[],aSelId=null,aNewDay=1,aNewTime="";
 
 function initAdmin(){
   aCSMs=migrateSlots(deepCopy(CSMS));
   aSelId=aCSMs[0]?aCSMs[0].id:null;
-  refreshAdminCount();renderAdminSidebar();renderAdminEditor();
+  refreshAdminCount();renderCSMChips();renderCSMEditor();
 }
 
 function refreshAdminCount(){
-  var el=document.getElementById("admin-count");
-  if(el)el.textContent="— "+aCSMs.filter(function(c){return c.active;}).length+" CSMs ativos";
+  var el=document.getElementById('adm-count');
+  if(el)el.textContent='Treinamento — '+aCSMs.filter(function(c){return c.active;}).length+' CSMs ativos';
 }
 
-async function saveAdminConfig(){
-  CSMS=migrateSlots(deepCopy(aCSMs));
-  try{await fetch(WEBHOOK_SAVE_CONFIG,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({config:{csms:CSMS,duration:DURATION}})});}catch(e){}
-  try{localStorage.setItem(LS_KEY,JSON.stringify({csms:CSMS,duration:DURATION}));}catch(e){}
-  var b=document.getElementById("saved-ok");
-  if(b){b.style.display="inline-block";setTimeout(function(){b.style.display="none";},2000);}
-}
-
-function renderAdminSidebar(){
-  var html="";
+function renderCSMChips(){
+  var html='';
   aCSMs.forEach(function(c){
-    var init=c.name.split(" ").map(function(w){return w[0]||"";}).slice(0,2).join("");
-    html+='<div class="csm-item'+(c.id===aSelId?" sel":"")+'" onclick="selectCSM('+c.id+')">'
-      +'<div class="csm-av">'+esc(init)+'</div>'
-      +'<div style="min-width:0"><div style="font-size:13px;font-weight:700;color:#22367b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.name.split(" ")[0])+'</div>'
-      +'<div style="font-size:11px;color:#5a6074">'+(c.active?"Ativo":"Inativo")+'</div></div></div>';
+    html+='<button class="csm-chip'+(c.id===aSelId?' active':'')+'" onclick="selectCSM('+c.id+')">'
+      +esc(c.name.split(' ')[0])+(c.active?'':' <span style="opacity:.5">(inativo)</span>')+'</button>';
   });
-  html+='<button class="abtn abtn-secondary abtn-sm" style="width:100%;margin-top:4px" onclick="addCSM()">+ Adicionar CSM</button>';
-  document.getElementById("admin-sidebar").innerHTML=html;
+  document.getElementById('csm-chips').innerHTML=html;
 }
 
-function selectCSM(id){aSelId=id;aNewDay=1;aNewTime="";renderAdminSidebar();renderAdminEditor();}
+function selectCSM(id){aSelId=id;aNewDay=1;aNewTime='';renderCSMChips();renderCSMEditor();}
 
 function addCSM(){
   var newId=Math.max.apply(null,aCSMs.map(function(c){return c.id;}).concat([0]))+1;
   aCSMs.push({id:newId,name:"Novo CSM",email:"",icsUrl:"",projects:0,active:true,slots:[]});
-  aSelId=newId;refreshAdminCount();renderAdminSidebar();renderAdminEditor();
+  aSelId=newId;refreshAdminCount();renderCSMChips();renderCSMEditor();
 }
 
 function removeCSM(){
-  if(aCSMs.length<=1){alert("É necessário manter ao menos 1 CSM.");return;}
+  if(aCSMs.length<=1){toast('É necessário manter ao menos 1 CSM.');return;}
   var csm=aCSMs.find(function(c){return c.id===aSelId;});
-  if(!confirm("Remover "+(csm?csm.name:"este CSM")+"? Esta ação não pode ser desfeita."))return;
+  if(!confirm('Remover '+(csm?csm.name:'este CSM')+'? Esta ação não pode ser desfeita.'))return;
   aCSMs=aCSMs.filter(function(c){return c.id!==aSelId;});
   aSelId=aCSMs[0]?aCSMs[0].id:null;
-  refreshAdminCount();renderAdminSidebar();renderAdminEditor();
+  refreshAdminCount();renderCSMChips();renderCSMEditor();
 }
 
-function renderAdminEditor(){
+function renderCSMEditor(){
   var csm=aCSMs.find(function(c){return c.id===aSelId;});
-  if(!csm){document.getElementById("admin-content").innerHTML='<p style="color:#5a6074;font-size:14px">Selecione um CSM.</p>';return;}
+  var el=document.getElementById('csm-editor');
+  if(!csm){el.innerHTML='<p style="color:var(--gray);font-size:14px">Selecione um CSM.</p>';return;}
   var slotsHtml=csm.slots.length
-    ?csm.slots.map(function(s,i){return '<span class="slot-tag"><span style="font-size:10px;font-weight:800;background:#d3e2f2;border-radius:4px;padding:1px 5px">'+(DAYS_WEEK[s.day]||"?")+'</span>'+esc(s.time)+'<button onclick="removeSlot('+i+')" style="background:none;border:none;cursor:pointer;color:#5a6074;padding:0;font-size:14px;line-height:1">×</button></span>';}).join("")
-    :'<span style="font-size:13px;color:#5a6074">Nenhum horário configurado.</span>';
-  var dayOpts=DAYS_WEEK.slice(1).map(function(d,i){return '<option value="'+(i+1)+'"'+(aNewDay===(i+1)?" selected":"")+'>'+d+'</option>';}).join("");
-  document.getElementById("admin-content").innerHTML=
-    '<div class="admin-card"><div class="admin-card-title"><span class="adot"></span>Informações do CSM</div>'
+    ?csm.slots.map(function(s,i){return '<span class="slot-tag"><span style="font-size:10px;font-weight:800;background:var(--light);border-radius:4px;padding:1px 5px">'+(DAYS_WEEK[s.day]||'?')+'</span>'+esc(s.time)+'<button onclick="removeSlot('+i+')" style="background:none;border:none;cursor:pointer;color:var(--gray);padding:0;font-size:14px;line-height:1">×</button></span>';}).join('')
+    :'<span style="font-size:13px;color:var(--gray)">Nenhum horário configurado.</span>';
+  var dayOpts=DAYS_WEEK.slice(1).map(function(d,i){return '<option value="'+(i+1)+'"'+(aNewDay===(i+1)?' selected':'')+'>'+d+'</option>';}).join('');
+  el.innerHTML=
+    '<div class="card"><div class="section-ttl">● Informações do CSM</div>'
     +'<div class="fg2">'
-    +'<div><span class="fl">Nome</span><input class="fi" value="'+esc(csm.name)+'" oninput="updField(\'name\',this.value)"/></div>'
-    +'<div><span class="fl">E-mail (convidado)</span><input class="fi" value="'+esc(csm.email)+'" oninput="updField(\'email\',this.value)"/></div>'
-    +'<div class="sp2"><span class="fl">Link ICS secreto da agenda Google</span><input class="fi" placeholder="https://calendar.google.com/calendar/ical/..." value="'+esc(csm.icsUrl)+'" oninput="updField(\'icsUrl\',this.value)"/></div>'
-    +'<div><span class="fl">Projetos ativos</span><input class="fi" type="number" min="0" value="'+csm.projects+'" oninput="updField(\'projects\',parseInt(this.value)||0)"/></div>'
-    +'<div><span class="fl">Status</span><select class="fs" onchange="updField(\'active\',this.value===\'ativo\')"><option value="ativo"'+(csm.active?" selected":"")+'>Ativo</option><option value="inativo"'+(!csm.active?" selected":"")+'>Inativo</option></select></div>'
+    +'<div><span class="fl">Nome</span><input class="fi" value="'+esc(csm.name)+'" oninput="updField(\'name\',this.value)"></div>'
+    +'<div><span class="fl">E-mail (convidado)</span><input class="fi" value="'+esc(csm.email)+'" oninput="updField(\'email\',this.value)"></div>'
+    +'<div class="sp2"><span class="fl">Link ICS secreto da Agenda Google</span><input class="fi" placeholder="https://calendar.google.com/calendar/ical/..." value="'+esc(csm.icsUrl)+'" oninput="updField(\'icsUrl\',this.value)"></div>'
+    +'<div><span class="fl">Projetos ativos</span><input class="fi" type="number" min="0" value="'+csm.projects+'" oninput="updField(\'projects\',parseInt(this.value)||0)"></div>'
+    +'<div><span class="fl">Status</span><select class="fs" onchange="updField(\'active\',this.value===\'ativo\')"><option value="ativo"'+(csm.active?' selected':'')+'>Ativo</option><option value="inativo"'+(!csm.active?' selected':'')+'>Inativo</option></select></div>'
     +'</div></div>'
-    +'<div class="admin-card"><div class="admin-card-title"><span class="adot"></span>Horários disponíveis</div>'
+    +'<div class="card"><div class="section-ttl">📅 Horários Disponíveis</div>'
     +'<div style="margin-bottom:14px">'+slotsHtml+'</div>'
     +'<div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap">'
     +'<div><span class="fl">Dia</span><select class="fs" style="width:100px" id="aDay" onchange="aNewDay=parseInt(this.value)">'+dayOpts+'</select></div>'
-    +'<div><span class="fl">Horário</span><input class="fi" style="width:96px" placeholder="HH:MM" id="aTime" value="'+esc(aNewTime)+'" oninput="aNewTime=this.value"/></div>'
+    +'<div><span class="fl">Horário</span><input class="fi" style="width:96px" placeholder="HH:MM" id="aTime" value="'+esc(aNewTime)+'" oninput="aNewTime=this.value"></div>'
     +'<button class="abtn abtn-secondary abtn-sm" onclick="addSlot()">+ Adicionar</button>'
     +'</div></div>'
     +'<div style="display:flex;justify-content:flex-end"><button class="abtn abtn-danger abtn-sm" onclick="removeCSM()">Remover CSM</button></div>';
@@ -290,93 +346,108 @@ function updField(field,val){
   var csm=aCSMs.find(function(c){return c.id===aSelId;});
   if(!csm)return;
   csm[field]=val;
-  if(field==="name"||field==="active"){refreshAdminCount();renderAdminSidebar();}
+  if(field==='name'||field==='active'){refreshAdminCount();renderCSMChips();}
 }
 
 function addSlot(){
-  var t=(aNewTime||"").trim();
-  if(!t.match(/^\d{2}:\d{2}$/)){alert("Informe o horário no formato HH:MM (ex: 09:30)");return;}
+  var t=(aNewTime||'').trim();
+  if(!t.match(/^\d{2}:\d{2}$/)){toast('Informe o horário no formato HH:MM (ex: 09:30)');return;}
   var csm=aCSMs.find(function(c){return c.id===aSelId;});
   if(!csm)return;
   if(csm.slots.some(function(s){return s.day===aNewDay&&s.time===t;}))return;
   csm.slots.push({day:aNewDay,time:t});
   csm.slots.sort(function(a,b){return a.day-b.day||a.time.localeCompare(b.time);});
-  aNewTime="";renderAdminEditor();
+  aNewTime='';renderCSMEditor();
 }
 
 function removeSlot(idx){
   var csm=aCSMs.find(function(c){return c.id===aSelId;});
-  if(csm){csm.slots.splice(idx,1);renderAdminEditor();}
+  if(csm){csm.slots.splice(idx,1);renderCSMEditor();}
 }
 
-// ══ BOOKING ═══════════════════════════════════════════════════════════════════
-var step=1,form={school:"",contact:"",email:"",phone:"",guests:""},chosen=null,meetUrl="",availSlots=[];
+async function saveAdminConfig(){
+  CSMS=migrateSlots(deepCopy(aCSMs));
+  try{await fetch(WEBHOOK_SAVE_CONFIG,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({config:{csms:CSMS,duration:DURATION}})});}catch(e){}
+  try{localStorage.setItem(LS_KEY,JSON.stringify({csms:CSMS,duration:DURATION}));}catch(e){}
+  showMsg('msg-csms','✅ Configurações salvas com sucesso!',true);
+}
 
-function fmtDate(d){return d.toLocaleDateString("pt-BR",{timeZone:"America/Sao_Paulo",weekday:"long",day:"2-digit",month:"long"});}
-function fmtTime(d){return d.toLocaleTimeString("pt-BR",{timeZone:"America/Sao_Paulo",hour:"2-digit",minute:"2-digit"});}
+// ══ BOOKING (regras 100% inalteradas) ═════════════════════════════════════════
+var step=1,form={school:'',contact:'',email:'',phone:'',guests:''},chosen=null,meetUrl='',availSlots=[];
+
+function fmtDate(d){return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo',weekday:'long',day:'2-digit',month:'long'});}
+function fmtTime(d){return d.toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit'});}
 function addMin(d,m){return new Date(d.getTime()+m*60000);}
 
 function buildCalendarHTML(slots){
   var byMonth={};
-  for(var i=0;i<slots.length;i++){var s=slots[i];var dt=new Date(s.datetime);var mk=dt.getFullYear()+"-"+pad(dt.getMonth()+1);if(!byMonth[mk])byMonth[mk]={year:dt.getFullYear(),month:dt.getMonth(),slots:[]};byMonth[mk].slots.push({dt:dt,idx:i});}
-  var html="";var mkeys=Object.keys(byMonth).sort();
+  for(var i=0;i<slots.length;i++){var s=slots[i];var dt=new Date(s.datetime);var mk=dt.getFullYear()+'-'+pad(dt.getMonth()+1);if(!byMonth[mk])byMonth[mk]={year:dt.getFullYear(),month:dt.getMonth(),slots:[]};byMonth[mk].slots.push({dt:dt,idx:i});}
+  var html='';var mkeys=Object.keys(byMonth).sort();
   for(var mi=0;mi<mkeys.length;mi++){
     var mk2=mkeys[mi];var g=byMonth[mk2];var firstDay=new Date(g.year,g.month,1).getDay();var daysInMonth=new Date(g.year,g.month+1,0).getDate();
     var slotMap={};for(var si=0;si<g.slots.length;si++){var ss=g.slots[si];var dd=ss.dt.getDate();if(!slotMap[dd])slotMap[dd]=[];slotMap[dd].push(ss);}
-    var headers="";for(var di=0;di<DAYS_PT.length;di++){headers+="<div style='text-align:center;font-size:11px;font-weight:700;color:#5a6074;padding:4px 0'>"+DAYS_PT[di]+"</div>";}
-    var grid="";for(var ei=0;ei<firstDay;ei++)grid+="<div></div>";
+    var headers='';for(var di=0;di<DAYS_PT.length;di++){headers+='<div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray);padding:4px 0">'+DAYS_PT[di]+'</div>';}
+    var grid='';for(var ei=0;ei<firstDay;ei++)grid+='<div></div>';
     for(var n=1;n<=daysInMonth;n++){var ds=slotMap[n]||[];
-      if(!ds.length){grid+="<div style='min-height:52px;border-radius:8px;background:#f5f7fb;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c0c8d8;font-weight:600'>"+n+"</div>";}
-      else{var times="";for(var ti=0;ti<ds.length;ti++){var ts2=ds[ti];times+="<button onclick='selectSlot("+ts2.idx+")' style='display:block;width:100%;padding:2px 0;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;color:#1a56db;font-family:Nunito,sans-serif;border-radius:4px'>"+fmtTime(ts2.dt)+"</button>";}
-      grid+="<div style='min-height:52px;border-radius:8px;background:#e8f0fe;border:1.5px solid #c5d8f8;padding:4px 3px'><div style='text-align:center;font-size:12px;font-weight:800;color:#22367b;margin-bottom:2px'>"+n+"</div>"+times+"</div>";}}
-    html+="<div style='margin-bottom:28px'><div style='font-weight:800;font-size:15px;color:#22367b;margin-bottom:12px'>"+MONTHS_PT[g.month]+" "+g.year+"</div><div style='display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px'>"+headers+"</div><div style='display:grid;grid-template-columns:repeat(7,1fr);gap:3px'>"+grid+"</div></div>";
+      if(!ds.length){grid+='<div style="min-height:52px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:13px;color:#c0c8d8;font-weight:600">'+n+'</div>';}
+      else{var times='';for(var ti=0;ti<ds.length;ti++){var ts2=ds[ti];times+='<button onclick="selectSlot('+ts2.idx+')" style="display:block;width:100%;padding:2px 0;border:none;background:none;cursor:pointer;font-size:11px;font-weight:700;color:#1a56db;font-family:Nunito,sans-serif;border-radius:4px">'+fmtTime(ts2.dt)+'</button>';}
+      grid+='<div style="min-height:52px;border-radius:8px;background:#e8f0fe;border:1.5px solid #c5d8f8;padding:4px 3px"><div style="text-align:center;font-size:12px;font-weight:800;color:var(--blue);margin-bottom:2px">'+n+'</div>'+times+'</div>';}}
+    html+='<div style="margin-bottom:28px"><div style="font-weight:800;font-size:15px;color:var(--blue);margin-bottom:12px">'+MONTHS_PT[g.month]+' '+g.year+'</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">'+headers+'</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">'+grid+'</div></div>';
   }
   return html;
 }
 
 function renderSteps(){
-  var items=[["1","Dados"],["2","Horario"],["3","Confirmacao"]];var html="";
-  for(var i=0;i<items.length;i++){var n=items[i][0],l=items[i][1],s=i+1,cls=s<step?"done":s===step?"active":"";html+=(i?"<div class='step-sep'></div>":"")+"<div class='step-item "+cls+"'><div class='step-num'>"+(s<step?"✓":n)+"</div>"+l+"</div>";}
-  document.getElementById("stepsBar").innerHTML=html;
+  var items=[['1','Dados'],['2','Horário'],['3','Confirmação']];var html='';
+  for(var i=0;i<items.length;i++){var n=items[i][0],l=items[i][1],s=i+1;
+    var cls=s<step?'done':s===step?'active':'';
+    var numStyle=s<step?'background:#057a55;border-color:#057a55;color:#fff':s===step?'background:var(--blue);border-color:var(--blue);color:#fff':'';
+    var textColor=s<step?'color:#057a55':s===step?'color:var(--blue)':'color:var(--gray)';
+    html+=(i?'<div style="width:32px;height:2px;background:var(--light);margin:0 4px"></div>':'')
+      +'<div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;'+textColor+'">'
+      +'<div style="width:26px;height:26px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;'+numStyle+'">'+(s<step?'✓':n)+'</div>'+l+'</div>';
+  }
+  document.getElementById('stepsBar').innerHTML=html;
 }
 
 function renderStep1(){
-  document.getElementById("content").innerHTML=
-    "<div class='card'><h2>Dados da instituicao</h2><div class='form-row'>"
-    +"<div class='form-group full'><label>Nome da Instituicao *</label><input type='text' id='fs' placeholder='Ex: Escola Estadual Sao Jose' value='"+esc(form.school)+"'/></div>"
-    +"<div class='form-group'><label>Responsavel *</label><input type='text' id='fc' placeholder='Nome completo' value='"+esc(form.contact)+"'/></div>"
-    +"<div class='form-group'><label>Telefone *</label><input type='tel' id='fp' placeholder='(48) 9 9999-9999' value='"+esc(form.phone)+"'/></div>"
-    +"<div class='form-group full'><label>E-mail do responsavel *</label><input type='email' id='fe' placeholder='responsavel@escola.edu.br' value='"+esc(form.email)+"'/></div>"
-    +"<div class='form-group full'><label>Convidados adicionais</label><input type='text' id='fg' placeholder='email1@ex.com, email2@ex.com' value='"+esc(form.guests)+"'/></div>"
-    +"</div><div style='margin-top:8px;padding:10px 14px;background:#fffbea;border:1px solid rgba(255,202,38,.4);border-radius:8px;font-size:13px;color:#92400e'>Reuniao de Treinamento — duracao de "+DURATION+" minutos</div>"
-    +"<div style='margin-top:20px'><button class='btn btn-primary' onclick='goStep2()'>Ver horarios disponiveis</button></div></div>";
+  document.getElementById('content').innerHTML=
+    "<div class='card'><h2>Dados da instituição</h2><div class='form-row'>"
+    +"<div class='form-group full'><label>Nome da Instituição *</label><input type='text' id='fs' placeholder='Ex: Escola Estadual São José' value='"+esc(form.school)+"'></div>"
+    +"<div class='form-group'><label>Responsável *</label><input type='text' id='fc' placeholder='Nome completo' value='"+esc(form.contact)+"'></div>"
+    +"<div class='form-group'><label>Telefone *</label><input type='tel' id='fp' placeholder='(48) 9 9999-9999' value='"+esc(form.phone)+"'></div>"
+    +"<div class='form-group full'><label>E-mail do responsável *</label><input type='email' id='fe' placeholder='responsavel@escola.edu.br' value='"+esc(form.email)+"'></div>"
+    +"<div class='form-group full'><label>Convidados adicionais</label><input type='text' id='fg' placeholder='email1@ex.com, email2@ex.com' value='"+esc(form.guests)+"'></div>"
+    +"</div>"
+    +"<div style='margin-top:8px;padding:10px 14px;background:#fffbea;border:1px solid rgba(255,202,38,.4);border-radius:8px;font-size:13px;color:#92400e'>Reunião de Treinamento — duração de "+DURATION+" minutos</div>"
+    +"<div style='margin-top:20px'><button class='btn btn-primary' onclick='goStep2()'>Ver horários disponíveis</button></div></div>";
 }
 
-function gv(id){var el=document.getElementById(id);return el?el.value.trim():"";}
+function gv(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 
 async function goStep2(){
-  form={school:gv("fs"),contact:gv("fc"),email:gv("fe"),phone:gv("fp"),guests:gv("fg")};
-  if(!form.school||!form.contact||!form.email||!form.phone){alert("Preencha todos os campos obrigatorios.");return;}
+  form={school:gv('fs'),contact:gv('fc'),email:gv('fe'),phone:gv('fp'),guests:gv('fg')};
+  if(!form.school||!form.contact||!form.email||!form.phone){alert('Preencha todos os campos obrigatórios.');return;}
   step=2;renderSteps();
-  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><p style='font-size:13px;color:#5a6074;margin-bottom:8px'>Verificando disponibilidade...</p><div style='display:flex;justify-content:center;padding:20px 0'><div style='width:36px;height:36px;border:3px solid #d3e2f2;border-top-color:#22367b;border-radius:50%;animation:spin .7s linear infinite'></div></div></div>";
+  document.getElementById('content').innerHTML="<div class='card'><h2>Escolha um horário</h2><p style='font-size:13px;color:var(--gray);margin-bottom:8px'>Verificando disponibilidade...</p><div style='display:flex;justify-content:center;padding:20px 0'><div style='width:36px;height:36px;border:3px solid var(--light);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite'></div></div></div>";
   try{
-    var r=await fetch(WEBHOOK_CHECK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({})});
-    var text=await r.text();if(!text||!text.trim())throw new Error("empty");
-    var data=JSON.parse(text);if(!data.success)throw new Error("error");
-    availSlots=(data.days||[]).flatMap(function(d){return(d.slots||[]).map(function(s){return{datetime:d.date+"T"+s.time+":00-03:00",csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};});});
-    if(!availSlots.length)throw new Error("empty");
+    var r=await fetch(WEBHOOK_CHECK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+    var text=await r.text();if(!text||!text.trim())throw new Error('empty');
+    var data=JSON.parse(text);if(!data.success)throw new Error('error');
+    availSlots=(data.days||[]).flatMap(function(d){return(d.slots||[]).map(function(s){return{datetime:d.date+'T'+s.time+':00-03:00',csmId:s.csmId,csmName:s.csmName,csmEmail:s.csmEmail};});});
+    if(!availSlots.length)throw new Error('empty');
   }catch(e){
-    document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2><div class='alert-box'>Nenhum horario disponivel nos proximos 60 dias. Entre em contato conosco.</div><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div>";
+    document.getElementById('content').innerHTML="<div class='card'><h2>Escolha um horário</h2><div class='alert-box'>Nenhum horário disponível nos próximos 60 dias. Entre em contato conosco.</div><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div>";
     return;
   }
   renderStep2();
 }
 
 function renderStep2(){
-  document.getElementById("content").innerHTML="<div class='card'><h2>Escolha um horario</h2>"
-    +"<p style='font-size:12px;color:#5a6074;margin:-8px 0 16px;display:flex;align-items:center;gap:5px'>"
+  document.getElementById('content').innerHTML="<div class='card'><h2>Escolha um horário</h2>"
+    +"<p style='font-size:12px;color:var(--gray);margin:-8px 0 16px;display:flex;align-items:center;gap:5px'>"
     +"<span style='width:8px;height:8px;border-radius:50%;background:#10ccea;display:inline-block'></span>"
-    +"Horarios no fuso de Brasilia (UTC-3)</p>"
+    +"Horários no fuso de Brasília (UTC-3)</p>"
     +buildCalendarHTML(availSlots)
     +"<div style='margin-top:8px'><button class='btn btn-secondary' onclick='step=1;renderSteps();renderStep1()'>Voltar</button></div></div>";
 }
@@ -384,60 +455,50 @@ function renderStep2(){
 function selectSlot(i){
   chosen=availSlots[i];step=3;renderSteps();
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
-  var rows=[["Instituicao",form.school],["Responsavel",form.contact],["E-mail",form.email],["Telefone",form.phone]];
-  if(form.guests)rows.push(["Convidados",form.guests]);
-  rows.push(["Data",fmtDate(dt)],["Horario",fmtTime(dt)+" - "+fmtTime(end)],["Duracao",DURATION+" minutos"]);
-  var rh="";for(var ri=0;ri<rows.length;ri++){rh+="<div class='summary-row'><span>"+rows[ri][0]+"</span><span>"+esc(String(rows[ri][1]))+"</span></div>";}
-  document.getElementById("content").innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rh+"</div><div class='alert-box'>Ao confirmar, voce recebera um convite do Google Calendar com o link da reuniao.</div><div id='err3'></div><div style='display:flex;gap:10px'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento</button></div></div>";
+  var rows=[['Instituição',form.school],['Responsável',form.contact],['E-mail',form.email],['Telefone',form.phone]];
+  if(form.guests)rows.push(['Convidados',form.guests]);
+  rows.push(['Data',fmtDate(dt)],['Horário',fmtTime(dt)+' - '+fmtTime(end)],['Duração',DURATION+' minutos']);
+  var rh='';for(var ri=0;ri<rows.length;ri++){rh+='<div class="summary-row"><span>'+rows[ri][0]+'</span><span>'+esc(String(rows[ri][1]))+'</span></div>';}
+  document.getElementById('content').innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rh+"</div><div class='alert-box'>Ao confirmar, você receberá um convite do Google Calendar com o link da reunião.</div><div id='err3'></div><div style='display:flex;gap:10px'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento</button></div></div>";
 }
 
 async function confirmar(){
-  var btn=document.getElementById("btnC");btn.disabled=true;btn.textContent="Confirmando...";
+  var btn=document.getElementById('btnC');btn.disabled=true;btn.textContent='Confirmando...';
   try{
     var payload={school:form.school,contact:form.contact,email:form.email,phone:form.phone,guests:form.guests,
-      date:chosen.datetime.split("T")[0],time:chosen.datetime.split("T")[1].slice(0,5),
-      csmEmail:chosen.csmEmail,csmName:chosen.csmName,calendarId:"primary"};
-    var r=await fetch(WEBHOOK_BOOK,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-    var text=await r.text();if(!text||!text.trim())throw new Error("Webhook nao retornou resposta.");
-    var data=JSON.parse(text);if(!data.success)throw new Error(data.error||"Erro no webhook");
-    meetUrl=data.meetLink||"";renderSuccess();
+      date:chosen.datetime.split('T')[0],time:chosen.datetime.split('T')[1].slice(0,5),
+      csmEmail:chosen.csmEmail,csmName:chosen.csmName,calendarId:'primary'};
+    var r=await fetch(WEBHOOK_BOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var text=await r.text();if(!text||!text.trim())throw new Error('Webhook não retornou resposta.');
+    var data=JSON.parse(text);if(!data.success)throw new Error(data.error||'Erro no webhook');
+    meetUrl=data.meetLink||'';renderSuccess();
   }catch(e){
-    btn.disabled=false;btn.textContent="Confirmar agendamento";
-    document.getElementById("err3").innerHTML="<div class='error-box'>Erro: "+esc(e.message)+"</div>";
+    btn.disabled=false;btn.textContent='Confirmar agendamento';
+    document.getElementById('err3').innerHTML='<div class="error-box">Erro: '+esc(e.message)+'</div>';
   }
 }
 
 function renderSuccess(){
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
-  document.getElementById("stepsBar").style.display="none";
-  var mh="";
-  if(meetUrl){mh="<div class='meet-link-box'><strong>Link da reuniao</strong><div style='display:flex;align-items:center;gap:8px;margin-top:4px'><span style='flex:1;word-break:break-all;font-size:13px;color:#22367b'>"+meetUrl+"</span><button onclick=\"navigator.clipboard.writeText('"+meetUrl+"').then(function(){this.textContent='Copiado!';var self=this;setTimeout(function(){self.textContent='Copiar'},2000)}.bind(this))\" style='flex-shrink:0;padding:6px 14px;border-radius:6px;border:1.5px solid #d3e2f2;background:#fff;color:#22367b;font-weight:700;font-size:12px;cursor:pointer;font-family:Nunito,sans-serif'>Copiar</button></div></div>";}
-  document.getElementById("content").innerHTML="<div class='success-card card'><div class='success-icon'>🎉</div><h2>Agendamento confirmado!</h2><p class='sub'><strong>"+esc(form.school)+"</strong><br>"+fmtDate(dt)+" - "+fmtTime(dt)+" - "+fmtTime(end)+"<br>CSM responsavel: <strong>"+esc(chosen.csmName)+"</strong><br>Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"+mh+"<button class='new-btn' onclick='resetAll()'>Fazer novo agendamento</button></div>";
+  document.getElementById('stepsBar').style.display='none';
+  var mh='';
+  if(meetUrl){mh="<div class='meet-link-box'><strong>Link da reunião</strong><div style='display:flex;align-items:center;gap:8px;margin-top:4px'><span style='flex:1;word-break:break-all;font-size:13px;color:var(--blue)'>"+meetUrl+"</span><button onclick=\"navigator.clipboard.writeText('"+meetUrl+"').then(function(){this.textContent='Copiado!';var self=this;setTimeout(function(){self.textContent='Copiar'},2000)}.bind(this))\" style='flex-shrink:0;padding:6px 14px;border-radius:6px;border:1.5px solid var(--light);background:#fff;color:var(--blue);font-weight:700;font-size:12px;cursor:pointer;font-family:Nunito,sans-serif'>Copiar</button></div></div>";}
+  document.getElementById('content').innerHTML="<div class='success-card card'><div class='success-icon'>🎉</div><h2>Agendamento confirmado!</h2><p class='sub'><strong>"+esc(form.school)+"</strong><br>"+fmtDate(dt)+" - "+fmtTime(dt)+" - "+fmtTime(end)+"<br>CSM responsável: <strong>"+esc(chosen.csmName)+"</strong><br>Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"+mh+"<button class='new-btn' onclick='resetAll()'>Fazer novo agendamento</button></div>";
 }
 
 function resetAll(){
-  step=1;form={school:"",contact:"",email:"",phone:"",guests:""};chosen=null;meetUrl="";
-  document.getElementById("stepsBar").style.display="";renderSteps();renderStep1();
+  step=1;form={school:'',contact:'',email:'',phone:'',guests:''};chosen=null;meetUrl='';
+  document.getElementById('stepsBar').style.display='';renderSteps();renderStep1();
 }
-
-// ── Login com Enter ───────────────────────────────────────────────────────────
-document.addEventListener("keydown",function(e){
-  if(e.key==="Enter"&&document.getElementById("page-login").style.display!=="none"){doLogin();}
-});
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-var isAdmin=window.location.search.indexOf("admin")!==-1;
-if(isAdmin){
-  if(sessionStorage.getItem("admin_ok")){
-    document.getElementById("page-admin").style.display="block";
-    loadConfig().then(function(){initAdmin();});
-  }else{
-    document.getElementById("page-login").style.display="block";
-  }
-}else{
-  document.getElementById("page-booking").style.display="block";
-  loadConfig().then(function(){renderSteps();renderStep1();});
-}
+document.addEventListener('DOMContentLoaded', async function(){
+  await loadConfig();
+  renderSteps();
+  renderStep1();
+  document.getElementById('adm-pw').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+  if(location.hash==='#admin') goAdmin();
+});
 </script>
 </body>
 </html>
