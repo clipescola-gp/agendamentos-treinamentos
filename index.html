@@ -203,7 +203,7 @@ function selectSlot(i){
   var dt=new Date(chosen.datetime),end=addMin(dt,DURATION);
   var rows=[['Instituição',form.school],['Responsável',form.contact],['E-mail',form.email],['Telefone',form.phone]];
   if(form.guests)rows.push(['Convidados',form.guests]);
-  rows.push(['Data',fmtDate(dt)],['Horário',fmtTime(dt)+' – '+fmtTime(end)],['Duração',DURATION+' minutos']);
+  rows.push(['Data',fmtDate(dt)],['Horário',fmtTime(dt)+' – '+fmtTime(end)],['Duração',DURATION+' minutos'],['CSM responsável',chosen.csmName]);
   var rh='';for(var ri=0;ri<rows.length;ri++){rh+='<div class="summary-row"><span>'+rows[ri][0]+'</span><span>'+esc(String(rows[ri][1]))+'</span></div>';}
   document.getElementById('content').innerHTML="<div class='card'><h2>Confirmar agendamento</h2><div style='margin-bottom:20px'>"+rh+"</div><div class='alert-box'>Ao confirmar, você receberá um convite do Google Calendar com o link da reunião.</div><div id='err3'></div><div style='display:flex;gap:10px;flex-wrap:wrap'><button class='btn btn-secondary' onclick='step=2;renderSteps();renderStep2()'>← Voltar</button><button class='btn btn-primary' id='btnC' onclick='confirmar()'>Confirmar agendamento ✓</button></div></div>";
 }
@@ -236,7 +236,7 @@ function renderSuccess(){
   }
   document.getElementById('content').innerHTML="<div class='success-card card'>"
     +"<div class='success-icon'>🎉</div><h2>Agendamento confirmado!</h2>"
-    +"<p class='sub'><strong>"+esc(form.school)+"</strong><br>"+fmtDate(dt)+"<br>"+fmtTime(dt)+" – "+fmtTime(end)+"<br>Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"
+    +"<p class='sub'><strong>"+esc(form.school)+"</strong><br>"+fmtDate(dt)+"<br>"+fmtTime(dt)+" – "+fmtTime(end)+"<br>CSM responsável: <strong>"+esc(chosen.csmName)+"</strong><br>Um convite foi enviado para <strong>"+esc(form.email)+"</strong></p>"
     +mh
     +"<div style='background:#fffbea;border:1px solid rgba(255,202,38,.4);border-radius:8px;padding:12px 16px;font-size:13px;color:#92400e;text-align:left;margin-bottom:20px'>"
     +"<strong>Lembre-se:</strong> Acesse a reunião pelo computador, com microfone e fone de ouvido. Tolerância de 15 minutos de atraso. Em caso de imprevisto, entre em contato para reagendar.</div>"
